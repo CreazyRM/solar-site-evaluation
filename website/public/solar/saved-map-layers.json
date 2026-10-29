@@ -1,0 +1,90 @@
+{
+  "layers": [
+    {
+      "name": "Aerial \u00b7 saved 2015 imagery",
+      "file": "assets/aerial-interactive.webp",
+      "bounds": [
+        [
+          44.667125417452226,
+          -81.1407216030827
+        ],
+        [
+          44.679306939270575,
+          -81.12447957399156
+        ]
+      ],
+      "source_crs": "EPSG:4326",
+      "display_crs": "EPSG:3857",
+      "note": "Saved report evidence; georeferenced from the retained export extent. Imagery is historical; no fresh conditions or permissions are established."
+    },
+    {
+      "name": "Soil \u00b7 saved Oct 2026",
+      "file": "assets/soil-interactive.webp",
+      "bounds": [
+        [
+          44.667125417452226,
+          -81.1407216030827
+        ],
+        [
+          44.679306939270575,
+          -81.12447957399156
+        ]
+      ],
+      "source_crs": "EPSG:4326",
+      "display_crs": "EPSG:3857",
+      "note": "Saved report evidence; georeferenced from the retained export extent. Imagery is historical; no fresh conditions or permissions are established."
+    },
+    {
+      "name": "Wetlands \u00b7 saved Oct 2026",
+      "file": "assets/wetlands-interactive.webp",
+      "bounds": [
+        [
+          44.667125417452226,
+          -81.1407216030827
+        ],
+        [
+          44.679306939270575,
+          -81.12447957399156
+        ]
+      ],
+      "source_crs": "EPSG:4326",
+      "display_crs": "EPSG:3857",
+      "note": "Saved report evidence; georeferenced from the retained export extent. Imagery is historical; no fresh conditions or permissions are established."
+    },
+    {
+      "name": "Zoning \u00b7 saved Oct 2026",
+      "file": "assets/zoning-interactive.webp",
+      "bounds": [
+        [
+          44.667125417452226,
+          -81.1407216030827
+        ],
+        [
+          44.679306939270575,
+          -81.12447957399156
+        ]
+      ],
+      "source_crs": "EPSG:4326",
+      "display_crs": "EPSG:3857",
+      "note": "Saved report evidence; georeferenced from the retained export extent. Imagery is historical; no fresh conditions or permissions are established."
+    },
+    {
+      "name": "Slope \u00b7 saved 2 m DTM",
+      "file": "assets/slope-interactive.png",
+      "bounds": [
+        [
+          44.668419016846535,
+          -81.1358391168539
+        ],
+        [
+          44.677987086760346,
+          -81.12935774638075
+        ]
+      ],
+      "source_crs": "EPSG:26917",
+      "display_crs": "EPSG:3857",
+      "note": "Saved terrain export retrieved 2 Oct 2026; acquisition date unknown. Pale green \u22645%; green >5\u201310%; yellow >10\u201315%; red >15% grade. Transparent cells are outside the parcel or unavailable. Reprojected for display; statistics are unchanged."
+    }
+  ],
+  "provenance": "Retained pipeline run reusable-pipeline-test-2026-10-16; original evidence preserved."
+}

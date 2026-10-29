@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 300" fill="none">
+  <title>Solar farm line drawing</title>
+  <desc>Two rows of solar panels stand in a gently rolling field, with a sun, trees and a small inverter building.</desc>
+  <defs>
+    <g id="panel" stroke="#355c49" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M36 59v20m91-20v20M36 79l22-20m69 20-21-20"/>
+      <path d="M30 0h140l-20 58H10Z" fill="#edf3e8"/>
+      <path d="m65 0-20 58m55-58L80 58m55-58-20 58M20 29h140" stroke="#80977b" stroke-width="1.5"/>
+      <path d="M8 83h144" stroke="#b9c6ad" stroke-width="1.3"/>
+    </g>
+    <g id="pine" stroke="#688263" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0 0-15 23h8l-14 22h15l-15 22h42L6 45h15L7 23h8Z" fill="#f0f4ec"/>
+      <path d="M0 58v24"/>
+    </g>
+  </defs>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M55 177c101-61 194-52 292-17s172 44 267 2 170-49 252-15 106 43 158 30" stroke="#c7d2bc" stroke-width="1.7"/>
+    <path d="M37 252c131-21 238-4 370 13s242 11 361-7 179-12 271 4" stroke="#a9b99b" stroke-width="1.8"/>
+    <path d="M116 283c157-9 240 2 366 4m243-6 164-1m39-1 48 2" stroke="#d0d8c7" stroke-width="1.4"/>
+    <circle cx="878" cy="60" r="24" fill="#f4f2d9" stroke="#a3ad71" stroke-width="2"/>
+    <path d="M878 20V10m0 90v10m40-50h10m-90 0h-10m78-28 7-7m-64 64-7 7m64-7 7 7m-64-64-7-7" stroke="#a3ad71" stroke-width="2"/>
+    <path d="M205 68c10-16 28-16 39 0m-18 0c9-13 24-13 33 0m455 24c9-11 22-11 31 0" stroke="#b5c2a8" stroke-width="1.7"/>
+    <use href="#pine" x="121" y="124"/>
+    <use href="#pine" transform="translate(977 158) scale(.77)"/>
+    <path d="M934 234v-35m-10 20 10 7m9-17-9 10" stroke="#688263" stroke-width="2"/>
+    <path d="M934 154c-12 0-17 11-14 19-15 9-8 29 7 29h15c17 0 24-20 9-29 3-10-4-19-17-19Z" fill="#f0f4ec" stroke="#8b9e7d" stroke-width="2"/>
+    <path d="M167 216v-38l23-12 23 12v38m-46-38h46" fill="#f7f8f5" stroke="#78916b" stroke-width="2"/>
+    <path d="M184 216v-26h13v26m-39 1h65" stroke="#78916b" stroke-width="1.8"/>
+    <path d="m185 175 8-4" stroke="#b1bd91" stroke-width="1.5"/>
+    <use href="#panel" transform="translate(285 120) scale(.72)"/>
+    <use href="#panel" transform="translate(449 120) scale(.72)"/>
+    <use href="#panel" transform="translate(613 120) scale(.72)"/>
+    <use href="#panel" transform="translate(222 188)"/>
+    <use href="#panel" transform="translate(444 188)"/>
+    <use href="#panel" transform="translate(666 188)"/>
+    <path d="m81 248 5-9 4 8m793 15 5-9 4 8m-440 21 4-7 4 7m542-36 4-8 4 8" stroke="#a8b897" stroke-width="1.6"/>
+  </g>
+</svg>

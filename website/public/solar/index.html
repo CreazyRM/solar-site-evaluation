@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#23483d"><meta name="description" content="Explore sourced Ontario solar site reports, parcel maps and assessment findings."><title>Solar Atlas · Ontario Site Reports</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="vendor/leaflet.css"><link rel="stylesheet" href="vendor/leaflet.draw.css"><script src="report-data.js" defer></script><script src="app.js" defer></script><script src="banner-editor.js" defer></script><script src="vendor/leaflet.js" defer></script><script src="vendor/leaflet.draw.js" defer></script><script type="module" src="workflow.js"></script></head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<aside class="sidebar">
+ <a class="brand" href="#" id="home-brand"><span class="brand-symbol">✳</span><span>solar<span class="brand-light">atlas</span></span></a>
+ <div class="nav-caption">WORKSPACE</div>
+ <nav aria-label="Main navigation"><button class="nav-item active" id="overview-nav"><span>◫</span> Overview</button><button class="nav-item" id="library-nav"><span>▤</span> Report library <span class="nav-count">1</span></button></nav>
+ <div class="nav-caption report-nav" hidden>ASSESSMENT</div>
+ <nav class="report-nav section-nav" aria-label="Report sections" hidden>
+  <a href="#land"><span>01</span> Land & location</a><a href="#soil"><span>02</span> Soil & slope</a><a href="#access"><span>03</span> Access & lines</a><a href="#grid"><span>04</span> Grid capacity</a><a href="#planning"><span>05</span> Planning & zoning</a><a href="#sources"><span>↗</span> Evidence & sources</a>
+ </nav>
+</aside>
+<div class="shell">
+ <main id="main">
+  <section class="welcome solar-banner-section" id="welcome" aria-labelledby="solar-hero-title">
+   <div class="solar-photo-banner">
+   <img class="solar-hero-photo" src="assets/solar-farm-photo.webp" alt="" aria-hidden="true" fetchpriority="high">
+   <div class="solar-hero-content"><h1 id="solar-hero-title">Ontario Solar Site Assessment</h1></div>
+   </div>
+   <details class="banner-customizer" id="banner-customizer"><summary>Adjust banner</summary><div class="banner-editor-panel">
+    <div class="banner-editor-header"><strong>Banner appearance</strong><button id="banner-editor-close" type="button" aria-label="Close banner editor">×</button></div>
+    <label class="banner-title-field">Title<input id="banner-title-input" type="text" maxlength="80" value="Ontario Solar Site Assessment"></label>
+    <label for="banner-x">Title horizontal position <output id="banner-x-value">4%</output><input id="banner-x" type="range" aria-label="Title horizontal position" min="0" max="70" value="4"></label>
+    <label for="banner-y">Title vertical position <output id="banner-y-value">15%</output><input id="banner-y" type="range" aria-label="Title vertical position" min="0" max="70" value="15"></label>
+    <label for="banner-size">Text size <output id="banner-size-value">42 px</output><input id="banner-size" type="range" aria-label="Text size" min="24" max="64" value="42"></label>
+    <label for="banner-shade">Photo overlay <output id="banner-shade-value">85%</output><input id="banner-shade" type="range" aria-label="Photo overlay" min="0" max="85" value="85"></label>
+    <label for="banner-image">Photo vertical framing <output id="banner-image-value">48%</output><input id="banner-image" type="range" aria-label="Photo vertical framing" min="0" max="100" value="48"></label>
+    <div class="banner-editor-actions"><button type="button" id="banner-save" class="outline-button">Save in this browser</button><button type="button" id="banner-copy" class="outline-button">Copy settings</button><button type="button" id="banner-reset" class="outline-button">Reset</button></div>
+    <p id="banner-editor-status" role="status" aria-live="polite">Preview changes here. Save applies only to this browser; copy settings to share your layout with the site editor.</p>
+   </div></details>
+  </section>
+  <section class="search-card" aria-labelledby="search-heading"><div class="search-title"><span class="step-icon">↗</span><div><h2 id="search-heading">Find an address or parcel</h2></div></div>
+   <form id="address-form"><label class="sr-only" for="address">Ontario property address</label><div class="input-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><input id="address" name="address" type="text" placeholder="Enter a street address, municipality, ON" autocomplete="street-address" required minlength="5" maxlength="240"><button class="clear-input" type="button" id="clear-address" aria-label="Clear address" hidden>×</button></div><button type="submit" class="primary" disabled>Find boundary <span>→</span></button></form>
+   <div class="search-footer"><span><i></i> Live public-data screening; some steps require a separate AI service.</span><button id="try-example" type="button">Open Highway 6 report <span>↗</span></button></div>
+   <div id="search-status" role="status" aria-live="polite" hidden></div>
+  </section>
+
+  <section id="boundary-workspace" hidden>
+   <h1 id="run-address">Confirm the location and study area</h1>
+   <p class="section-intro">Choose a parcel, or draw the area you want to assess. The original parcel remains separate.</p>
+   <ol id="lookup-progress" aria-live="polite"></ol><div id="candidate-list"></div><p id="lookup-note" class="lookup-note"></p><div id="lookup-evidence"></div>
+   <div class="map-editor-panel"><div class="map-editor-toolbar"><strong id="study-area">No study boundary</strong><button id="reset-study" class="outline-button">Use whole parcel / reset</button><button id="clear-study" class="outline-button">Clear selection</button></div>
+   <div id="boundary-map" aria-label="Interactive map for drawing the study boundary"></div>
+   <p id="parcel-meta" class="parcel-meta"></p><p class="map-help">Teal dashed line: original assessment parcel. Gold fill: selected study area. Click consecutive points to connect line segments, then click the first point to close the polygon. Areas outside the matched parcel are trimmed automatically. Use Edit layers to move vertices. Drawing does not establish ownership or legal access.</p></div>
+   <div class="study-confirmation"><label><input type="checkbox" id="study-confirm"> I confirm this location and study boundary.</label><button id="evaluate-study" class="primary" disabled>Evaluate selected area →</button></div>
+   <p id="boundary-status" role="status" aria-live="polite"></p><ul id="evaluation-events" aria-live="polite"></ul>
+  </section>
+  <article id="live-report" hidden aria-label="Selected study area assessment"></article>
+  <section id="library" class="library"><div class="section-heading"><div><h2>Available reports</h2></div><span class="muted" id="saved-count">1 saved assessment</span></div>
+   <button class="report-card" id="open-example"><img src="assets/aerial.webp" alt="Aerial view of the saved parcel"><span class="report-card-copy"><span class="report-card-top"><span class="outline-badge">GROUND-MOUNT SOLAR</span><span class="report-card-date">09 Oct 2026</span></span><strong>019471 Highway 6</strong><span class="report-card-place">Georgian Bluffs, Ontario · N0H 2T0</span><span class="report-card-stats"><span>64.949 acres</span><span>CLI 2, 3 & 5</span><span class="review-text">Review required</span></span></span><span class="card-arrow">↗</span></button>
+   <div class="library-controls"><button id="delete-saved-report" class="delete-report-button" type="button" aria-label="Delete saved report for 019471 Highway 6">Delete report</button></div><div id="library-empty" class="library-empty" hidden><p>No saved reports.</p><button id="restore-saved-report" class="outline-button" type="button">Undo deletion</button></div><p id="library-feedback" role="status" aria-live="polite"></p>
+  </section>
+  <article id="report" hidden aria-labelledby="report-title">
+   <div class="report-toolbar"><button class="text-button" id="back-overview">← Back to overview</button><button class="delete-report-button" id="delete-open-report" type="button">Delete report</button><button class="outline-button" id="print-report">Print report <span>↗</span></button></div>
+   <header class="report-header"><div><h1 id="report-title">019471 Highway 6</h1><p>Georgian Bluffs, Ontario · N0H 2T0</p></div><span class="status-pill"><span></span> Further review required</span></header>
+   <div class="report-notice"><span>ⓘ</span><p><strong>Historical evidence, clearly dated.</strong> This saved report uses evidence from 2–9 October 2026 and 2015 aerial imagery. It is a preliminary screening, not a development approval. Opening this page does not refresh the assessment.</p></div>
+   <div class="metrics-grid" id="metrics-grid"></div>
+   <section class="map-panel"><div class="map-panel-header"><div><h2>Explore the parcel</h2></div><button class="outline-button" id="expand-map">Expand map ↗</button></div><div class="evidence-layer-picker"><label for="saved-evidence-layer">Evidence layer</label><select id="saved-evidence-layer" aria-label="Evidence layer"><option>Loading saved layers…</option></select></div><div id="saved-report-map" class="interactive-report-map" aria-label="Interactive saved report map"></div><p id="saved-map-status" class="report-map-note" role="status"></p></section>
+   <div class="findings-heading"><h2>Assessment findings</h2></div>
+   <div id="report-sections"></div>
+   <section id="sources" class="detail-section"><div class="detail-header"><span class="section-number">↗</span><div><h2>Sources & assessment limits</h2></div></div><p class="section-intro">Public data supports screening. Source dates, map coverage, and unconfirmed permissions matter.</p><div id="sources-list"></div><div class="limits-box"><h3>Before a development decision</h3><p>Verify title identifiers, legal access, current site conditions, the actual serving feeder and point of connection, and operative planning approvals. No net developable acreage or exact maximum capacity is established. GeoWarehouse was excluded; login-dependent sources were skipped.</p></div><button id="download-data" class="outline-button">Download report data ↓</button></section>
+  </article>
+ </main>
+</div>
+<dialog id="map-dialog" aria-labelledby="dialog-title"><div class="dialog-header"><h2 id="dialog-title">Parcel map</h2><button id="close-dialog" aria-label="Close map">×</button></div><img id="expanded-map" alt="Expanded parcel map"><p id="dialog-caption"></p></dialog>
+<dialog id="delete-report-dialog" class="delete-dialog" aria-labelledby="delete-report-title" aria-describedby="delete-report-description"><h2 id="delete-report-title">Delete saved report?</h2><p id="delete-report-description">Remove the saved report for 019471 Highway 6 from the library in this browser? This stays deleted after refresh. You can undo from the report library. Other browsers and original source files are unchanged.</p><div class="delete-dialog-actions"><button id="cancel-report-delete" class="outline-button" type="button">Cancel</button><button id="confirm-report-delete" class="delete-report-button" type="button">Delete report</button></div></dialog>
+</body></html>

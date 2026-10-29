@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {validatePolygon,areaM2,contained,evaluate} from '../lib/assessment.mjs';
+import {clipToParcel,arcgisRings} from '../public/solar/geometry.mjs';
+const parcel=JSON.parse(fs.readFileSync(new URL('../public/solar/example-parcel.json',import.meta.url)));
+validatePolygon(parcel.geometry);
+const ring=parcel.geometry.coordinates[0];
+const center=ring.slice(0,-1).reduce((p,q)=>[p[0]+q[0]/(ring.length-1),p[1]+q[1]/(ring.length-1)],[0,0]);
+const x=center[0],y=center[1],d=.0003;
+const subset={type:'Polygon',coordinates:[[[x-d,y-d],[x+d,y-d],[x+d,y+d],[x-d,y+d],[x-d,y-d]]]};
+validatePolygon(subset);assert(contained(subset,parcel.geometry));assert(areaM2(subset)<areaM2(parcel.geometry));
+const outside={type:'Polygon',coordinates:[[[-79,44],[-78.999,44],[-78.999,44.001],[-79,44.001],[-79,44]]]};
+assert(!contained(outside,parcel.geometry));
+await assert.rejects(evaluate({address:'Test',geometry:outside,parcel}),/does not overlap/);
+assert.throws(()=>validatePolygon({type:'Point',coordinates:center}));
+assert.throws(()=>validatePolygon({type:'Polygon',coordinates:[[[x,y],[x+d,y+d],[x,y+d],[x+d,y],[x,y]]]}));
+fs.writeFileSync(path.join(os.tmpdir(),'solar-subset-test.geojson'),JSON.stringify({type:'Feature',properties:{test:true},geometry:subset}));
+// Deterministic failure replay verifies that missing sources never become findings.
+const nativeFetch=globalThis.fetch;globalThis.fetch=async()=>new Response('{}',{status:403});
+const rect=(a,b,c,d)=>({type:'Polygon',coordinates:[[[a,b],[c,b],[c,d],[a,d],[a,b]]]});
+const boundary=rect(-81,44,-80.99,44.01),crossing=rect(-81.005,44.005,-80.995,44.015);
+const original=JSON.stringify(boundary),clipped=clipToParcel(crossing,boundary);
+assert(contained(clipped,boundary));assert(areaM2(clipped)<areaM2(crossing));assert.equal(JSON.stringify(boundary),original);
+const enclosing=rect(-81.001,43.999,-80.989,44.011);assert(Math.abs(areaM2(clipToParcel(enclosing,boundary))-areaM2(boundary))<.01);
+assert.throws(()=>clipToParcel(rect(-81.01,44,-81,44.01),boundary),/does not overlap/);
+const splitParcel={type:'MultiPolygon',coordinates:[rect(-81,44,-80.998,44.002).coordinates,rect(-80.996,44,-80.994,44.002).coordinates]};
+const split=clipToParcel(rect(-81.001,43.999,-80.993,44.003),splitParcel);assert.equal(split.type,'MultiPolygon');assert.equal(split.coordinates.length,2);assert.equal(arcgisRings(split).length,2);
+const donut={type:'Polygon',coordinates:[boundary.coordinates[0],rect(-80.998,44.002,-80.992,44.008).coordinates[0]]};
+const holeResult=clipToParcel(enclosing,donut);assert.equal(holeResult.coordinates.length,2);assert(areaM2(holeResult)<areaM2(boundary));assert.equal(arcgisRings(holeResult).length,2);
+try{const r=await evaluate({address:'Offline failure test',geometry:subset,parcel});assert.equal(r.metrics.soil.status,'skipped');assert.equal(r.metrics.soil.reason,'access_denied');assert.equal(r.metrics.capacity_2mw.status,'skipped');assert.equal(r.overall_project_decision,null);assert.equal(r.input.study_boundary_sha256.length,64);
+const clippedReport=await evaluate({address:'Clipping test',geometry:crossing,parcel:{geometry:boundary}});assert(contained(clippedReport.input.assessment_geometry,boundary));assert.equal(clippedReport.metrics.area.value.square_metres,areaM2(clipped));
+}finally{globalThis.fetch=nativeFetch;}
+console.log('Assessment checks passed: subset, automatic clipping, empty intersection, multipart, holes, original preservation, server consistency and source-failure skips.');

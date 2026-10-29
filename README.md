@@ -1,6 +1,6 @@
 # Ontario Solar Site Evaluation
 
-Reusable Codex skill, Python calculations and evidence-review workflow for Ontario ground-mount solar screening.
+Reusable Codex skill, Python calculations, evidence-review workflow and Solar Atlas website source for Ontario ground-mount solar screening.
 
 ## Scope
 
@@ -46,8 +46,15 @@ Read `skills/solar-site-land-soil/references/standard-automation.md` and `reusab
 
 ## Collaboration
 
-Each collaborator uses their own account and local environment. Make changes on a branch, run offline tests, then merge reviewed changes. Keep source timestamps and uncertainty intact. Do not commit credentials, raw source documents, personal capstone files, output reports or caches. Historical case evidence is deliberately not included; offline replay commands require separately supplied saved evidence. Tests use synthetic fixtures only.
+Each collaborator uses their own account and local environment. Make changes on a branch, run offline tests, then merge reviewed changes. Keep source timestamps and uncertainty intact. Do not commit credentials, private source documents, personal capstone files, generated assessment archives or caches. Raw historical assessment archives are not included; offline replay commands require separately supplied saved evidence. The website includes its already-published, dated public example assets, which some website regression tests use alongside synthetic and mocked fixtures.
 
 ## Web integration
 
-Python calculation and orchestration functions can be reused by a server backend. This repository is not a deployed website or public AI service. Authentication, task queues, browser execution, AI service credentials and hosting must be configured separately.
+The [website source and development guide](website/README.md) include the current Solar Atlas frontend, public-data API modules and a dependency-free Node.js entry point:
+
+```sh
+cd website
+node standalone-server.mjs
+```
+
+Use Node.js 22.13 or later, then open http://127.0.0.1:3000/solar/. Other editors and Node hosting tools can reuse this code. Copying this repository does not publish a website or transfer the owner's Sites access or ChatGPT quota. The current website runs partial public-data screening; the full Python/Codex workflow is separate. Connecting that workflow requires backend integration. Authentication, task queues, browser execution, AI service credentials and hosting must be configured separately as needed.
