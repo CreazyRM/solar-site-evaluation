@@ -1,0 +1,26 @@
+{
+  "documented_at": "2026-10-16",
+  "note": "Discovery hints from previous runs, not a claim of current availability. Confirm coverage and metadata. GeoWarehouse is excluded.",
+  "ontario": {
+    "geocoder": "https://geolocator.api.geo.ca/",
+    "soil": "https://ws.lioservices.lrc.gov.on.ca/arcgis4/rest/services/AIA/AIA_Map/MapServer/29",
+    "wetlands": "https://ws.lioservices.lrc.gov.on.ca/arcgis2/rest/services/LIO_OPEN_DATA/LIO_Open01/MapServer/15",
+    "municipalities": "https://ws.lioservices.lrc.gov.on.ca/arcgis2/rest/services/LIO_OPEN_DATA/LIO_Open03/MapServer/14",
+    "dtm": "https://ws.geoservices.lrc.gov.on.ca/arcgis5/rest/services/Elevation/Ontario_DTM_LidarDerived/ImageServer"
+  },
+  "grey_county": {
+    "coverage": "Grey County only; zoning layer 1 is Georgian Bluffs only",
+    "parcel": "https://gis.grey.ca/server/rest/services/Public/Service_ParcelLabels/MapServer/0",
+    "address": "https://gis.grey.ca/server/rest/services/Public/Service_ParcelLabels/MapServer/4",
+    "geometry": "https://gis.grey.ca/server/rest/services/Utilities/Geometry/GeometryServer",
+    "imagery_2015": "https://gis.grey.ca/server/rest/services/Public/AirPhotos2015/ImageServer",
+    "georgian_bluffs_zoning": "https://gis.grey.ca/server/rest/services/Public/Service_GreyCountyZoning/MapServer/1",
+    "county_plan_landuse": "https://gis.grey.ca/server/rest/services/Public/Service_GCOfficialPlan/MapServer/30"
+  },
+  "utility_tools": {
+    "oeb": "https://www.oeb.ca/ontarios-energy-sector/centralized-capacity-information-map",
+    "hydro_one_map": "https://www.hydroone.com/business-services/generators/generation-capacity-map",
+    "hydro_one_calculator": "https://www.hydroone.com/businessservices_/generators_/Pages/stationcapacitycalculator.aspx",
+    "note": "Browser tools, not undocumented API endpoints; no contact or application submission."
+  }
+}

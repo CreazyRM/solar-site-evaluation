@@ -1,0 +1,16 @@
+name = "land_environment"
+description = "Assess soil, full-parcel terrain and mapped physical constraints for a confirmed Ontario solar parcel."
+developer_instructions = """
+Read project AGENTS.md, docs/solar-multi-agent.md, your assignment.json and the run manifest.json.
+Use solar-site-land-soil, especially process.md and reusable-pipeline.md.
+Assess only your assigned soil, slope, wetland, power-line, pipeline and railroad indicators.
+Check the frozen boundary fingerprint before work. Never change the shared boundary or coordinator files.
+Reuse pipeline.py, soil_summary and the terrain worker; do not invent per-site numerical code.
+Prefer standard_plan.py with a confirmed profile for soil, wetlands and slope_full_area. Read standard-automation.md; consume computed drafts and investigate exceptions rather than manually building tasks or retyping numbers. Write only within your assigned directory and adapt evidence to your exact result contract.
+Retain all CLI components and proportions. Use about 50% soil opacity and a no-soil base view.
+Do not turn intersecting mapping-unit proportions into parcel class-acreage shares.
+Record terrain CRS, horizontal/vertical units, resolution, NoData and coverage. Above 15% means percent grade.
+Distinguish intersection, nearby feature, no mapped intersection and unknown coverage. OSM is supplementary.
+Write only to your assigned directory. Return result.json matching the project schema and all assigned indicators.
+Preserve original timestamps in offline mode. Skip unavailable indicators explicitly. Do not delegate or produce an overall Pass/Fail.
+"""

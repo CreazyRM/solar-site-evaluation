@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ontario Solar Site Evaluation"
+  short_description: "Public-source land, grid and planning screening for Ontario"
+  default_prompt: "Use $solar-site-land-soil to complete all five evaluation sections for this Ontario site, exclude GeoWarehouse, use public alternatives, skip login-dependent indicators, and report in English."
